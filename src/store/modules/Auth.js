@@ -19,6 +19,23 @@ const actions = {
                 reject(error);
             });
         });
+    },
+    register({commit}, form) {
+        return new Promise((resolve, reject) => {
+            axios.post('http://localhost:3000/users', {
+                name: form.name,
+                email: form.email,
+                password: form.password
+            })
+            .then(response => {
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                commit('loggIn', response.data.user);
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        });
     }
 };
 
