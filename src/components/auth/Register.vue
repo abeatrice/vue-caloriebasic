@@ -108,7 +108,7 @@ export default {
             })
             .catch(error => {
                 this.loading = false;
-                this.error = error.response.data.error;
+                this.error = error;
                 this.form.password = '';
                 this.form.passwordConfirm = '';
                 this.$refs.password.focus();
