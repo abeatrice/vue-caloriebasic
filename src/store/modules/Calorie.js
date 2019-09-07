@@ -17,7 +17,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.get('http://localhost:3000/me/calories')
             .then(response => {
-                commit('storeCalories', response.data);
+                commit('storeCalories', response.data.calories);
                 resolve(response);
             })
             .catch(error => {
