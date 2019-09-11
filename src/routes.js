@@ -1,18 +1,23 @@
-//auth
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-
-//body
 import Welcome from './components/body/Welcome';
 import Home from './components/body/Home';
 import Profile from './components/body/Profile';
+import store from './store';
 
 export default {
     mode: 'history',
     linkActiveClass: 'font-bold',
     routes: [{
         path: '/',
-        component: Welcome
+        component: Welcome,
+        beforeEnter: (to, from, next) => {
+            if(store.getters.loggedIn) {
+                next('/Home');
+            } else {
+                next('/Welcome');
+            }
+        }
     }, {
         path: '/Login',
         component: Login

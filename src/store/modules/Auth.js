@@ -6,7 +6,7 @@ const state = {
 
 const getters = {
     authToken(state) {
-        return state.user.token;
+        return state.user.token || null;
     },
     loggedIn(state) {
         return state.user !== null;
