@@ -31,6 +31,24 @@ const actions = {
             });
         });
     },
+    adjustCalories({commit, rootGetters}, quantity) {
+        //set axios auth header: Bearer + token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
+
+        return new Promise((resolve, reject) => {
+            axios.post('http://localhost:3000/calories', {
+                "quantity": quantity
+            })
+            .then(response => {
+                commit('adjustCalorie', quantity);
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error);
+            })
+        });
+
+    },
     selectPrevDay({commit, getters}) {
         if(getters.selectedIndex + 1 < getters.calories.length) {
             commit('updateSelectedIndex', 1);
@@ -45,7 +63,8 @@ const actions = {
 
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
-    updateSelectedIndex: (state, value) => state.selectedIndex += value
+    updateSelectedIndex: (state, value) => state.selectedIndex += value,
+    adjustCalorie: (state, quantity) => state.calories[state.selectedIndex].quantity += quantity
 };
 
 export default {
