@@ -1,8 +1,14 @@
 import axios from 'axios';
 
 const state = {
-    calories: [],
-    selectedIndex: 0
+    calories: [{
+        "_id": {
+            "date": new Date()
+        },
+        "quantity": 0
+    }],
+    selectedIndex: 0,
+    selectedDate: new Date()
 };
 
 const getters = {
@@ -11,6 +17,9 @@ const getters = {
     },
     selectedIndex(state) {
         return state.selectedIndex;
+    },
+    selectedDate(state) {
+        return state.selectedDate;
     }
 };
 
