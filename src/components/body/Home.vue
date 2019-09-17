@@ -2,14 +2,14 @@
   <div class="h-full flex justify-center items-center">
     <div class="w-3/4 md:w-1/2">    
       <div class="flex justify-center align-center">
-        <div @click="selectPrevDay" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">prev</div>
         <datepicker 
+          @selected="updateSelectedDate"
           :value="selectedDate"
+          :inline="true"
         />
-        <div @click="selectNextDay" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer">next</div>
       </div>
       <p class="text-center text-xl font-semibold my-5">
-        {{calories[selectedIndex].quantity}}
+        {{calories[0].quantity}}
       </p>
       <div class="flex justify-center align-center mb-2">
         <div @click="adjustCalories(10)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">10</div>
@@ -43,7 +43,6 @@ export default {
   computed: {
     ...mapGetters([
         'calories',
-        'selectedIndex',
         'selectedDate'
     ])
   },
@@ -53,8 +52,7 @@ export default {
   methods: {
     ...mapActions([
       'getCalories',
-      'selectPrevDay',
-      'selectNextDay',
+      'updateSelectedDate',
       'adjustCalories'
     ])
   }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 const state = {
     calories: [{
@@ -7,7 +8,6 @@ const state = {
         },
         "quantity": 0
     }],
-    selectedIndex: 0,
     selectedDate: new Date()
 };
 
@@ -15,22 +15,22 @@ const getters = {
     calories(state) {
         return state.calories;
     },
-    selectedIndex(state) {
-        return state.selectedIndex;
-    },
     selectedDate(state) {
         return state.selectedDate;
+    },
+    isoDate(state) {
+        return new moment(state.selectedDate).format('YYYY-MM-DD');
     }
 };
 
 const actions = {
-    getCalories({commit, rootGetters}) {
+    getCalories({commit, getters, rootGetters}) {
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         //get calories and commit them to store
         return new Promise((resolve, reject) => {
-            axios.get(`http://localhost:3000/me/calories`)
+            axios.get(`http://localhost:3000/me/calories/${getters.isoDate}`)
             .then(response => {
                 commit('storeCalories', response.data.calories);
                 resolve(response);
@@ -58,21 +58,15 @@ const actions = {
         });
 
     },
-    selectPrevDay({commit, getters}) {
-        if(getters.selectedIndex + 1 < getters.calories.length) {
-            commit('updateSelectedIndex', 1);
-        }
-    },
-    selectNextDay({commit, getters}) {
-        if(getters.selectedIndex > 0) {
-            commit('updateSelectedIndex', -1);
-        }
+    updateSelectedDate({commit, dispatch}, date) {
+        commit('updateSelectedDate', date);
+        dispatch('getCalories');
     }
 };
 
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
-    updateSelectedIndex: (state, value) => state.selectedIndex += value,
+    updateSelectedDate: (state, date) => state.selectedDate = date,
     adjustCalorie: (state, quantity) => state.calories[state.selectedIndex].quantity += quantity
 };
 
