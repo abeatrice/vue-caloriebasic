@@ -2,13 +2,13 @@ import axios from 'axios';
 import moment from 'moment';
 
 const state = {
-    calories: [{
-        "_id": {
-            "date": new Date()
-        },
-        "quantity": 0
-    }],
-    selectedDate: new Date()
+    calories: {
+        "_id": "",
+        "date": moment().format('YYYY-MM-DD'),
+        "quantity": 0,
+        "user_id": ""
+    },
+    selectedDate: moment().format('YYYY-MM-DD')
 };
 
 const getters = {
@@ -18,7 +18,7 @@ const getters = {
     selectedDate(state) {
         return state.selectedDate;
     },
-    isoDate(state) {
+    selectedDateIso(state) {
         return new moment(state.selectedDate).format('YYYY-MM-DD');
     }
 };
@@ -30,9 +30,15 @@ const actions = {
 
         //get calories and commit them to store
         return new Promise((resolve, reject) => {
-            axios.get(`http://localhost:3000/me/calories/${getters.isoDate}`)
+            axios.get(`http://localhost:3000/me/calories/${getters.selectedDateIso}`)
             .then(response => {
-                commit('storeCalories', response.data.calories);
+                const data = response.data.calories ? response.data.calories : {
+                        "_id": "",
+                        "date": getters.selectedDateIso,
+                        "quantity": 0,
+                        "user_id": ""
+                };
+                commit('storeCalories', data);
                 resolve(response);
             })
             .catch(error => {

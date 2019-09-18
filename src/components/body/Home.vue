@@ -9,7 +9,7 @@
         />
       </div>
       <p class="text-center text-xl font-semibold my-5">
-        {{calories[0].quantity}}
+        {{calories.quantity}}
       </p>
       <div class="flex justify-center align-center mb-2">
         <div @click="adjustCalories(10)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">10</div>
