@@ -13,13 +13,13 @@
       </div>
       <div class="flex justify-center align-center mb-2">
         <div @click="adjustCalories(10)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">10</div>
-        <div @click="adjustCalories(25)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">25</div>
+        <div @click="adjustCalories(50)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">50</div>
         <div @click="adjustCalories(100)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">100</div>
         <div @click="adjustCalories(250)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">250</div>
       </div>
       <div class="flex justify-center align-center">
         <div @click="adjustCalories(-10)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">10</div>
-        <div @click="adjustCalories(-25)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">25</div>
+        <div @click="adjustCalories(-50)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">50</div>
         <div @click="adjustCalories(-100)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">100</div>
         <div @click="adjustCalories(-250)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-1 rounded focus:outline-none focus:shadow-outline cursor-pointer">250</div>
       </div>

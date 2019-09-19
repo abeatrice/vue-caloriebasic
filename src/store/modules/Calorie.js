@@ -4,11 +4,11 @@ import moment from 'moment';
 const state = {
     calories: {
         "_id": "",
-        "date": moment().format('YYYY-MM-DD'),
+        "date": new Date(),
         "quantity": 0,
         "user_id": ""
     },
-    selectedDate: moment().format('YYYY-MM-DD')
+    selectedDate: new Date()
 };
 
 const getters = {
@@ -46,16 +46,17 @@ const actions = {
             });
         });
     },
-    adjustCalories({commit, rootGetters}, quantity) {
+    adjustCalories({commit, getters, rootGetters}, quantity) {
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         return new Promise((resolve, reject) => {
             axios.post('http://localhost:3000/calories', {
-                "quantity": quantity
+                "quantity": quantity,
+                "date": getters.selectedDateIso
             })
             .then(response => {
-                commit('adjustCalorie', quantity);
+                commit('adjustCalorie', response.data.calorie.quantity);
                 resolve(response);
             })
             .catch(error => {
@@ -73,7 +74,7 @@ const actions = {
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
     updateSelectedDate: (state, date) => state.selectedDate = date,
-    adjustCalorie: (state, quantity) => state.calories[state.selectedIndex].quantity += quantity
+    adjustCalorie: (state, quantity) => state.calories.quantity = quantity
 };
 
 export default {
