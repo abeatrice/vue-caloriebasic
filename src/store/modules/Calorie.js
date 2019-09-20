@@ -18,6 +18,9 @@ const getters = {
     selectedDate(state) {
         return state.selectedDate;
     },
+    selectedDateForHumans(state) {
+        return new moment(state.selectedDate).format('dddd, MMMM Do YYYY');
+    },
     selectedDateIso(state) {
         return new moment(state.selectedDate).format('YYYY-MM-DD');
     }
