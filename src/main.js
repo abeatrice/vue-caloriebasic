@@ -6,10 +6,18 @@ import store from './store';
 
 Vue.use(VueRouter);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+const router = new VueRouter(routes);
+
+//set headers before each route
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next();
+});
 
 new Vue({
   store,
-  router: new VueRouter(routes),
+  router,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');

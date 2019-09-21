@@ -1,7 +1,7 @@
 <template>
-    <nav class="flex items-center justify-between bg-teal-500 px-6">
+    <nav class="flex items-center justify-between bg-teal-500 px-6 absolute w-screen">
         <div class="flex items-center flex-shrink-0 text-white">
-            <span class="font-semibold text-xl tracking-tight">Calorie Basic</span>
+            <router-link to="/" class="font-semibold text-xl tracking-tight" active-class="">Calorie Basic</router-link>
         </div>
         <div class="text-sm">
             <div v-if="!loggedIn">

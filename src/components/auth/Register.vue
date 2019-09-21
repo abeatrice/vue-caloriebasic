@@ -71,6 +71,9 @@
                     Register
                 </button>
             </form>
+            <p class="text-center text-gray-500 text-xs">
+                &copy; {{year}} Calorie Basic. All rights reserved.
+            </p>
         </div>
     </div>
 </template>
@@ -92,6 +95,9 @@ export default {
     computed: {
         hasError() {
             return this.error !== '';
+        },
+        year() {
+            return new Date().getFullYear();
         }
     },
     methods: {

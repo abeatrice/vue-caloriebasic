@@ -7,28 +7,42 @@ import store from './store';
 
 export default {
     mode: 'history',
-    linkActiveClass: 'font-bold',
+    linkActiveClass: 'font-semibold',
     routes: [{
         path: '/',
         component: Welcome,
-        beforeEnter: (to, from, next) => {
-            if(store.getters.loggedIn) {
-                next('/Home');
-            } else {
-                next('/Welcome');
-            }
+        meta: {
+            title: "Where Calorie Tracking is Easy | Calorie Basic"
         }
+        // ,
+        // beforeEnter: (to, from, next) => {
+        //     if(store.getters.loggedIn) {
+        //         next('/Home');
+        //     }
+        // }
     }, {
         path: '/Login',
-        component: Login
+        component: Login,
+        meta: {
+            title: "Login | Calorie Basic"
+        }
     }, {
         path: '/Register',
-        component: Register
+        component: Register,
+        meta: {
+            title: "Register | Calorie Basic"
+        }
     }, {
         path: '/Home',
-        component: Home
+        component: Home,
+        meta: {
+            title: "Where Calorie Tracking is Easy | Calorie Basic"
+        }
     }, {
         path: '/Profile',
-        component: Profile
+        component: Profile,
+        meta: {
+            title: "Profile | Calorie Basic"
+        }
     }
 ]};
