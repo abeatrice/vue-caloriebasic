@@ -3,7 +3,7 @@ import Register from './components/auth/Register';
 import Welcome from './components/body/Welcome';
 import Home from './components/body/Home';
 import Profile from './components/body/Profile';
-import store from './store';
+//import store from './store';
 
 export default {
     mode: 'history',

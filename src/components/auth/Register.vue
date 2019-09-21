@@ -1,45 +1,45 @@
 <template>
-    <div class="h-full flex justify-center items-center">
+    <div class="h-full flex flex-wrap justify-center items-center">
         <div class="w-3/4 md:w-1/2">
             <form @submit.prevent="onSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <label for="email" class="block text-teal-900 text-sm font-bold mb-2">User Name</label>
                     <input 
-                        v-model="form.name" 
+                        v-model="form.userName"
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="name"
-                        ref="name" 
-                        type="name" 
-                        placeholder="Jane Doe" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline"
+                        id="userName"
+                        ref="userName" 
+                        type="userName" 
+                        placeholder="calorieStar23" 
                         required
                     >
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                    <label for="email" class="block text-teal-900 text-sm font-bold mb-2">Email Address</label>
                     <input 
                         v-model="form.email" 
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         ref="email" 
                         type="email" 
-                        placeholder="name@example.com" 
+                        placeholder="janeDoe@example.com" 
                         required
                     >
                 </div>
                 <div class="mb-4">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <label for="password" class="block text-teal-900 text-sm font-bold mb-2">Password</label>
                     <input 
                         v-model="form.password"
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password"
                         ref="password"
                         type="password"
@@ -48,13 +48,13 @@
                     >
                 </div>
                 <div class="mb-4">
-                    <label for="password-confirm" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                    <label for="password-confirm" class="block text-teal-900 text-sm font-bold mb-2">Confirm Password</label>
                     <input 
                         v-model="form.passwordConfirm"
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password-confirm"
                         ref="password-confirm"
                         type="password" 
@@ -66,7 +66,7 @@
                 <button
                     :disabled="loading"
                     type="submit" 
-                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    class="w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                     Register
                 </button>
@@ -86,6 +86,7 @@ export default {
             loading: false,
             error: '',
             form: {
+                userName: '',
                 email: '',
                 password: '',
                 passwordConfirm: ''
@@ -106,29 +107,45 @@ export default {
         },
         onSubmit() {
             this.loading = true;
-            this.validateForm();
-            this.$store.dispatch('register', this.form)
-            .then(() => {
-                this.loading = false;
-                this.$router.push('home');
-            })
-            .catch(error => {
-                this.loading = false;
-                this.error = error;
-                this.form.password = '';
-                this.form.passwordConfirm = '';
-                this.$refs.password.focus();
-            });
+            if(this.validateForm()) {
+                this.$store.dispatch('register', this.form)
+                .then(() => {
+                    this.loading = false;
+                    this.$router.push('home');
+                })
+                .catch(error => {
+                    this.loading = false;
+                    this.error = error;
+                    this.form.password = '';
+                    this.form.passwordConfirm = '';
+                    this.$refs.password.focus();
+                });
+            }
         },
         validateForm() {
+            for(let input of Object.entries(this.form)) {
+                if(input[1].trim() === '') {
+                    this.error = 'All Inputs are required!';
+                    this.loading = false;
+                    this.$refs.userName.focus();
+                    return false;
+                }
+            }
+            if(this.form.userName.trim().includes(' ')) {
+                this.error = 'The user name cannot have a space!';
+                this.loading = false;
+                this.$refs.userName.focus();
+                return false;
+            }
             if (this.form.password !== this.form.passwordConfirm) {
                 this.error = 'The passwords do not match!';
                 this.loading = false;
                 this.form.password = '';
                 this.form.passwordConfirm = '';
                 this.$refs.password.focus();
-                return;
+                return false;
             }
+            return true;
         }
     }
 }

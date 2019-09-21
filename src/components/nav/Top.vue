@@ -5,7 +5,7 @@
         </div>
         <div class="text-sm">
             <div v-if="!loggedIn">
-                <router-link class="text-teal-200 hover:text-white mr-4" to="Login">Login</router-link>
+                <router-link class="text-teal-200 hover:text-white mr-4" to="/Login">Login</router-link>
                 <router-link class="text-teal-200 hover:text-white" to="/Register">Register</router-link>
             </div>
             <div v-else>

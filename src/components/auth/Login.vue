@@ -1,30 +1,30 @@
 <template>
-    <div class="h-full flex justify-center items-center">
-        <div class="w-3/4 md:w-1/2">
+    <div class="h-full flex flex-wrap justify-center content-center">
+        <div class="w-3/4 md:w-2/5">
             <form @submit.prevent="onSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-4">
-                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                    <label for="email" class="block text-teal-900 text-sm font-bold mb-2">User Name</label>
                     <input 
-                        v-model="form.email" 
+                        v-model="form.userName" 
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="email"
-                        ref="email" 
-                        type="email" 
-                        placeholder="name@example.com" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline"
+                        id="userName"
+                        ref="userName" 
+                        type="userName" 
+                        placeholder="calorieStar23" 
                         required
                     >
                 </div>
                 <div class="mb-6">
-                    <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <label for="password" class="block text-teal-900 text-sm font-bold mb-2">Password</label>
                     <input 
                         v-model="form.password"
                         @keyup="clearError"
                         :class="{'border-red-500':hasError}"
                         :disabled="loading"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 mb-3 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password"
                         ref="password"
                         type="password" 
@@ -36,7 +36,7 @@
                 <button
                     :disabled="loading"
                     type="submit" 
-                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    class="w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 >
                     Sign In
                 </button>
@@ -49,7 +49,6 @@
 </template>
 
 <script>
-
 export default {
     name: 'Login',
     data() {
@@ -57,7 +56,7 @@ export default {
             loading: false,
             error: '',
             form: {
-                "email": '',
+                "userName": '',
                 "password": '',
             }
         }

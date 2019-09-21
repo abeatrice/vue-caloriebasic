@@ -15,7 +15,7 @@ const getters = {
         if (state.user == null) {
             return '';
         }
-        return state.user.name;
+        return state.user.userName;
     }
 };
 
@@ -23,7 +23,7 @@ const actions = {
     register({commit}, form) {
         return new Promise((resolve, reject) => {
             axios.post('http://localhost:3000/users', {
-                name: form.name,
+                userName: form.userName,
                 email: form.email,
                 password: form.password
             })

@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <NavTop />
-    <div class="container mx-auto bg-teal-200 h-screen pt-6">
-      <router-view></router-view>
+    <div class="bg-teal-200 h-screen">
+      <div class="container mx-auto pt-8 h-full">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
