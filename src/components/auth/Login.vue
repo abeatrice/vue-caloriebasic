@@ -69,6 +69,9 @@ export default {
             return new Date().getFullYear();
         }
     },
+    mounted() {
+        this.$refs.userName.focus();
+    },
     methods: {
         clearError() {
             this.error = '';
@@ -84,7 +87,6 @@ export default {
                 this.loading = false;
                 this.error = error.response.data.error;
                 this.form.password = '';
-                this.$refs.password.focus();
             });
         }
     }

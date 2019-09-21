@@ -101,6 +101,9 @@ export default {
             return new Date().getFullYear();
         }
     },
+    mounted() {
+        this.$refs.userName.focus();
+    },
     methods: {
         clearError() {
             this.error = '';

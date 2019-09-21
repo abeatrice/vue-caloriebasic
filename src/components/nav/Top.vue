@@ -41,7 +41,7 @@ export default {
         signOut() {
             this.open = false;
             this.$store.dispatch('logout')
-            .then(() => this.$router.push('welcome'));
+            .then(() => this.$router.push('/'));
         }
     }
 }

@@ -29,7 +29,7 @@ const actions = {
             })
             .then(response => {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                commit('loggIn', response.data.user);
+                commit('loggedIn', response.data.user);
                 resolve(response);
             })
             .catch(error => {
