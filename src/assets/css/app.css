@@ -17,6 +17,13 @@
     @apply bg-green-700;
 }
 
+.btn-teal-light {
+    @apply bg-teal-400 text-teal-900;
+}
+.btn-teal-light:hover {
+    @apply bg-teal-300;
+}
+
 .btn-red {
     @apply bg-red-500 text-red-800 text-white;
 }

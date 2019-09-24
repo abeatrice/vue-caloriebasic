@@ -71,6 +71,16 @@ const actions = {
     updateSelectedDate({commit, dispatch}, date) {
         commit('updateSelectedDate', date);
         dispatch('getCalories');
+    },
+    selectPrevDay({commit, state, dispatch}) {
+        const date = moment(state.selectedDate).subtract(1, 'days').toDate();
+        commit('updateSelectedDate', date);
+        dispatch('getCalories');
+    },
+    selectNextDay({commit, state, dispatch}) {
+        const date = moment(state.selectedDate).add(1, 'days').toDate();
+        commit('updateSelectedDate', date);
+        dispatch('getCalories');
     }
 };
 
