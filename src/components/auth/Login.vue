@@ -1,7 +1,10 @@
 <template>
     <div class="h-full flex flex-wrap justify-center content-center">
         <div class="w-3/4 md:w-2/5">
-            <form @submit.prevent="onSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="py-1 text-md text-center font-semibold tracking-wide bg-teal-500 text-teal-100 rounded-t">
+                Welcome Back!
+            </div>
+            <form @submit.prevent="onSubmit" class="bg-white shadow-md rounded px-8 pt-6 pb-8">
                 <div class="mb-4">
                     <label for="email" class="block text-teal-900 text-sm font-bold mb-2">User Name</label>
                     <input 
@@ -41,7 +44,7 @@
                     Sign In
                 </button>
             </form>
-            <p class="text-center text-gray-500 text-xs">
+            <p class="text-center text-gray-500 text-xs mt-3">
                 &copy; {{year}} Calorie Basic. All rights reserved.
             </p>
         </div>
