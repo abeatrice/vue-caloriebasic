@@ -41,9 +41,9 @@ export default {
         ])
     },
     methods: {
-        signOut() {
+        async signOut() {
             this.open = false;
-            this.$store.dispatch('logout')
+            await this.$store.dispatch('logout')
             .then(() => this.$router.push('/'));
         }
     }

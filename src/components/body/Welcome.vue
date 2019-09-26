@@ -1,6 +1,6 @@
 <template>
   <div class="h-full flex flex-wrap justify-center content-center">
-    <div class="px-6 text-center bg-teal-100 rounded py-5 rounded shadow-md">
+    <div class="px-4 md:px-10 text-center bg-white rounded py-12 rounded shadow-md">
       <h1 class="text-teal-900 text-5xl font-bold leading-tight">Calorie Basic</h1>
       <h1 class="text-teal-700 text-sm">Tracking calories should be fast, simple, and easy.</h1>
       <div class="pt-5 flex justify-center">

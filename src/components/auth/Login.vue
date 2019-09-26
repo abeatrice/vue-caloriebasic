@@ -44,9 +44,6 @@
                     Sign In
                 </button>
             </form>
-            <p class="text-center text-gray-500 text-xs mt-3">
-                &copy; {{year}} Calorie Basic. All rights reserved.
-            </p>
         </div>
     </div>
 </template>
