@@ -15,10 +15,10 @@ export default {
             title: "Where Calorie Tracking is Easy | Calorie Basic"
         },
         beforeEnter: (to, from, next) => {
-            if(! store.getters.loggedIn) {
-                next();
-            } else {
+            if(store.getters.loggedIn) {
                 next('/Home');
+            } else {
+                next();
             }
         }
     }, {
@@ -38,6 +38,12 @@ export default {
         component: Home,
         meta: {
             title: "Where Calorie Tracking is Easy | Calorie Basic"
+        },
+        beforeEnter: (to, from, next) => {
+            if(! store.getters.loggedIn) {
+                next('/Login');
+            }
+            next();
         }
     }, {
         path: '/Profile',

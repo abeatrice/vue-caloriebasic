@@ -6,20 +6,17 @@
         <router-view></router-view>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
 import NavTop from './components/nav/Top.vue';
-import Footer from './components/nav/Footer.vue';
 import './assets/css/app.css';
 
 export default {
   name: 'app',
   components: {
-    NavTop,
-    Footer
+    NavTop
   },
   data() {
     return {
@@ -27,7 +24,7 @@ export default {
     }
   },
   created() {
-    this.background = require('./assets/images/background.svg');
+    this.background = require('./assets/images/background2.svg');
   }
 }
 </script>
