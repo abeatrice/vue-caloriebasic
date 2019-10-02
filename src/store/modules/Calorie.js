@@ -28,12 +28,15 @@ const getters = {
 
 const actions = {
     getCalories({commit, getters, rootGetters}) {
+        //set api address
+        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         //get calories and commit them to store
         return new Promise((resolve, reject) => {
-            axios.get(`http://localhost:3000/me/calories/${getters.selectedDateIso}`)
+            axios.get(`${apiAddress}/me/calories/${getters.selectedDateIso}`)
             .then(response => {
                 const data = response.data.calories ? response.data.calories : {
                         "_id": "",
@@ -50,11 +53,14 @@ const actions = {
         });
     },
     adjustCalories({commit, getters, rootGetters}, quantity) {
+        //set api address
+        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+        
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:3000/calories', {
+            axios.post(`${apiAddress}/calories`, {
                 "quantity": quantity,
                 "date": getters.selectedDateIso
             })

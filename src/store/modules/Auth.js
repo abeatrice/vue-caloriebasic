@@ -21,8 +21,11 @@ const getters = {
 
 const actions = {
     register({commit}, form) {
+        //set api address
+        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:3000/users', {
+            axios.post(`${apiAddress}/users`, {
                 userName: form.userName,
                 email: form.email,
                 password: form.password
@@ -38,8 +41,11 @@ const actions = {
         });
     },
     login({commit}, form) {
+        //set api address
+        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+
         return new Promise((resolve, reject) => {
-            axios.post('http://localhost:3000/users/login', form)
+            axios.post(`${apiAddress}/users/login`, form)
             .then(response => {
                 localStorage.setItem('user', JSON.stringify(response.data.user));
                 commit('loggedIn', response.data.user);
@@ -51,11 +57,14 @@ const actions = {
         });
     },
     logout(context) {
+        //set api address
+        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.user.token;
 
         if(context.getters.loggedIn) {
             return new Promise((resolve, reject) => {
-                axios.post('http://localhost:3000/users/me/logout')
+                axios.post(`${apiAddress}/users/me/logout`)
                 .then(response => {
                     localStorage.removeItem('user');
                     context.commit('loggedOut');
