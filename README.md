@@ -1,29 +1,76 @@
-# caloriebasic
+# Caloriebasic
+This is the caloriebasic.com front end built with vue cli.
+https://cli.vuejs.org/
 
-## Project setup
-```
-yarn install
-```
+##### Local Development
+    //get the source from the repository
+	$ git clone https://github.com/abeatrice/caloriebasic.git
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+    //change directory into the source
+	$ cd caloriebasic
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+    //copy the environment file example
+	$ cp .env.example .env
 
-### Run your tests
-```
-yarn run test
-```
+    //start the local development server
+	$ npm run serve
+    
+    //visit local host at port 8080 in a web browser
+	$ http://localhost:8080
 
-### Lints and fixes files
-```
-yarn run lint
-```
+##### Deploy
+https://cli.vuejs.org/guide/deployment.html#deployment
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+    //create the app directory
+	$ mkdir ~/app
+
+    //change directory into the app directory
+	$ cd ~/app
+
+    //get the source from the repository
+    $ git clone https://github.com/abeatrice/caloriebasic.git
+
+    //change directory into the source directory
+	$ cd caloriebasic
+
+    //copy the enviornment example file
+	$ cp .env.example .env
+
+    //build the application
+	$ npm run build
+
+#### Nginx
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
+
+    //install nginx
+    $ sudo apt update
+    $ sudo apt install nginx3
+
+    //set the firewall to allow nginx
+    $ sudo ufw allow 'Nginx HTTP'
+
+    //check nginx status
+    $ systemctl status nginx
+
+    //create the nginx server block configuration file
+    //replace <installation_user_here> with the user name that installed and built the application
+	$ sudo nano /etc/nginx/sites-available/caloriebasic.com
+        server {
+                listen 80;
+                root home/<installation_user_here>/app/caloriebasic/dist;
+                index index.html;
+                server_name caloriebasic.com www.caloriebasic.com;
+                error_page 404 /;
+                location / {
+                        try_files $uri $uri/ =404;
+                }
+        }
+
+    //create a link to the site configuration file in the sites enabled directory
+    $ sudo ln -s /etc/nginx/sites-available/caloriebasic.com /etc/nginx/sites-enabled/caloriebasic.com
+
+    //test the nginx configuration for errors
+	$ nginx -t
+
+    //reload nginx configuration
+	$ sudo systemctl reload nginx
