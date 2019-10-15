@@ -51,7 +51,7 @@ This is the [CalorieBasic.com](http://caloriebasic.com) front end created with [
 	$ npm run build
 
 #### Nginx
-https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
+[Nginx Installation](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
 
     //install nginx
     $ sudo apt update
