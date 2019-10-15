@@ -1,6 +1,5 @@
 # Caloriebasic
-This is the caloriebasic.com front end built with vue cli.
-https://cli.vuejs.org/
+This is the [CalorieBasic.com](http://caloriebasic.com) front end created with [Vue](https://cli.vuejs.org/) and [Tailwindcss](https://tailwindcss.com/docs/installation/).
 
 ##### Local Development
     //get the source from the repository
@@ -12,6 +11,9 @@ https://cli.vuejs.org/
     //copy the environment file example
 	$ cp .env.example .env
 
+    //install the dependencies
+    $ npm install
+
     //start the local development server
 	$ npm run serve
     
@@ -19,7 +21,13 @@ https://cli.vuejs.org/
 	$ http://localhost:8080
 
 ##### Deploy
-https://cli.vuejs.org/guide/deployment.html#deployment
+[Vue Deployment Guide](https://cli.vuejs.org/guide/deployment.html#deployment)
+[Node Installation](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04)
+
+    //install node
+    $ sudo apt update
+    $ sudo apt install nodejs
+    $ sudo apt install npm
 
     //create the app directory
 	$ mkdir ~/app
@@ -35,6 +43,9 @@ https://cli.vuejs.org/guide/deployment.html#deployment
 
     //copy the enviornment example file
 	$ cp .env.example .env
+
+    //install the dependencies
+    $ npm install
 
     //build the application
 	$ npm run build
