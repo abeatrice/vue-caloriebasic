@@ -21,8 +21,8 @@ This is the [CalorieBasic.com](http://caloriebasic.com) front end created with [
 	$ http://localhost:8080
 
 ##### Deploy
- - [Vue Deployment Guide](https://cli.vuejs.org/guide/deployment.html#deployment)
- - [Node Installation](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04)
+    [Vue Deployment Guide](https://cli.vuejs.org/guide/deployment.html#deployment)
+    [Node Installation](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-18-04)
 
     //install node
     $ sudo apt update
@@ -51,7 +51,7 @@ This is the [CalorieBasic.com](http://caloriebasic.com) front end created with [
 	$ npm run build
 
 #### Nginx
-[Nginx Installation](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
+    [Nginx Installation](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
 
     //install nginx
     $ sudo apt update
