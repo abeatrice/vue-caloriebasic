@@ -85,3 +85,32 @@ This is the [CalorieBasic.com](http://caloriebasic.com) front end created with [
 
     //reload nginx configuration
 	$ sudo systemctl reload nginx
+
+#### Nginx Certification: Let's Encrypt & Certbot
+[Documentation](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04)
+
+    //install certbot
+    $ sudo add-apt-repository ppa:certbot/certbot
+    $ sudo apt install python-certbot-nginx
+
+    //allow https through firewall
+    $ sudo ufw allow 'Nginx Full'
+    $ sudo ufw delete allow 'Nginx HTTP'
+
+    //obtain certificate & update nginx configuration
+    $ sudo certbot --nginx -d caloriebasic.com -d www.caloriebasic.com
+
+    //Certificate & Chain: /etc/letsencrypt/live/caloriebasic.com/fullchain.pem
+    //Key File: /etc/letsencrypt/live/caloriebasic.com/privkey.pem
+    //Account Credentials: configuration directory at /etc/letsencrypt
+    
+    //Test Configuration
+    https://www.ssllabs.com/ssltest/analyze.html?d=caloriebasic.com
+    https://www.ssllabs.com/ssltest/analyze.html?d=www.caloriebasic.com
+
+    //Certbot Auto-Renewal
+    //Certbot created a crontab entry at /etc/cron.d that will automatically renew
+    //any certificate thats within 30 days of expiration
+
+    //Test certbot renew
+    $ sudo certbot renew --dry-run
