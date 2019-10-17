@@ -22,7 +22,7 @@ const getters = {
 const actions = {
     register({commit}, form) {
         //set api address
-        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+        const apiAddress = process.env.VUE_APP_API_ADDRESS;
 
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users`, {
@@ -42,7 +42,7 @@ const actions = {
     },
     login({commit}, form) {
         //set api address
-        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+        const apiAddress = process.env.VUE_APP_API_ADDRESS;
 
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users/login`, form)
@@ -58,7 +58,7 @@ const actions = {
     },
     logout(context) {
         //set api address
-        const apiAddress = process.env.VUE_APP_API_HOST + ':' + process.env.VUE_APP_API_PORT;
+        const apiAddress = process.env.VUE_APP_API_ADDRESS;        
 
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.user.token;
 
