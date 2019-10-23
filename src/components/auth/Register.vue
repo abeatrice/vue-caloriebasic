@@ -162,7 +162,6 @@ export default {
             }
 
             for(let error of Object.entries(this.errors)) {
-                console.log(error);
                 if(error[1] !== '') {
                     this.form.password = '';
                     this.form.passwordConfirm = '';

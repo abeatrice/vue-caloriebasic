@@ -51,5 +51,8 @@ export default {
         meta: {
             title: "Profile | Calorie Basic"
         }
+    }, {
+        path: '*',
+        redirect: '/'
     }
 ]};
