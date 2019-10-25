@@ -28,8 +28,8 @@ const getters = {
 
 const actions = {
     getCalories({commit, getters, rootGetters}) {
-        //set api address
-        const apiAddress = process.env.VUE_APP_API_ADDRESS;        
+        //set api address        
+        const apiAddress = "https://caloriebasic.com/api";
 
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
@@ -54,7 +54,7 @@ const actions = {
     },
     adjustCalories({commit, getters, rootGetters}, quantity) {
         //set api address
-        const apiAddress = process.env.VUE_APP_API_ADDRESS;        
+        const apiAddress = "https://caloriebasic.com/api";
         
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
