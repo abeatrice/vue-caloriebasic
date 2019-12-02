@@ -1,5 +1,5 @@
 <template>
-    <nav class="flex items-center justify-between px-6 py-1 absolute w-screen">
+    <nav class="flex items-center justify-between px-6 py-1">
         <div class="flex items-center flex-shrink-0 text-indigo-400">
             <router-link to="/" class="font-semibold text-xl tracking-tight" active-class="">
                 <div class="flex items-center">

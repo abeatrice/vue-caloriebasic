@@ -1,10 +1,10 @@
 <template>
   <div>
-    <NavTop class="mt-3" />
+    <NavTop class="mt-4"/>
     <div class="flex justify-center items-center">
-      <div class="mt-16">
+      <div class="mt-12">
         <div class="mb-10">
-          <div class="text-6xl text-gray-500 text-center font-semibold leading-none">
+          <div class="text-6xl text-gray-500 text-center font-semibold leading-none mb-1">
             {{calories.quantity}}
           </div>
           <div class="text-md text-center font-semibold tracking-wide text-gray-500">
@@ -15,7 +15,7 @@
           @selected="updateSelectedDate"
           :value="selectedDate"
           :inline="true"
-          class="opacity-50 mb-10"
+          class="mb-10 text-gray-500"
         />
         <adjust-calories-buttons class="mt-3" />
       </div>
@@ -23,11 +23,26 @@
   </div>
 </template>
 
+<style>
+  .vdp-datepicker__calendar {
+    background-color: transparent !important;
+    border: none !important;
+  }
+  .selected {
+    background-color: #2c5282 !important;
+  }
+  .prev {
+    background-color: transparent !important;
+  }
+  .next {
+    background-color: transparent !important;
+  }
+</style>
+
 <script>
-import {mapGetters} from 'vuex';
-import {mapActions} from 'vuex';
-import Datepicker from 'vuejs-datepicker';
+import {mapGetters, mapActions} from 'vuex';
 import NavTop from '../nav/Top.vue';
+import Datepicker from 'vuejs-datepicker';
 import AdjustCaloriesButtons from '../partials/AdjustCaloriesButtons.vue';
 
 export default {
@@ -42,9 +57,9 @@ export default {
   },
   computed: {
     ...mapGetters([
-        'calories',
-        'selectedDate',
-        'selectedDateForHumans'
+      'calories',
+      'selectedDate',
+      'selectedDateForHumans'
     ])
   },
   mounted() {
