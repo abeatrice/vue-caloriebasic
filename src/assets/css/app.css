@@ -10,31 +10,17 @@
 }
 
 .btn-primary {
-    @apply bg-blue-800 text-white;
+    @apply bg-blue-800 text-blue-400;
 }
 .btn-primary:hover {
     @apply bg-blue-700;
 }
 
-.btn-green {
-    @apply bg-green-500 text-white;
+.btn-danger {
+    @apply bg-red-500 text-red-700;
 }
-.btn-green:hover {
-    @apply bg-green-700;
-}
-
-.btn-teal-light {
-    @apply bg-teal-400 text-teal-900;
-}
-.btn-teal-light:hover {
-    @apply bg-teal-300;
-}
-
-.btn-red {
-    @apply bg-red-500 text-red-800 text-white;
-}
-.btn-red:hover {
-    @apply bg-red-700;
+.btn-danger:hover {
+    @apply bg-red-400;
 }
 
 @tailwind utilities;
