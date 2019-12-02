@@ -1,18 +1,24 @@
 <template>
-    <div class="h-full flex flex-wrap justify-center items-center">
-        <div class="w-3/4 md:w-1/2">
-            <div class="py-1 text-md text-center font-semibold tracking-wide bg-teal-500 text-teal-100 rounded-t">
-                Let's get started!
-            </div>
-            <form @submit.prevent="onSubmit" class="bg-white shadow-md rounded-b px-8 pt-6 pb-8">
+    <div class="flex flex-col">
+        <div class="flex justify-center text-6xl text-indigo-400 mt-16 leading-none mb-2">
+            Calorie Basic
+        </div>
+        <div class="flex justify-center text-gray-500 mb-4">
+            Tracking calories should be fast, simple, and easy.
+        </div>
+        <div class="flex justify-center mb-10">
+            <div class="border-b-2 border-gray-700 w-3/5"></div>
+        </div>
+        <div class="flex justify-center mb-10">
+            <form @submit.prevent="onSubmit" class="w-3/4">
                 <div class="mb-4">
-                    <label for="email" class="block text-teal-900 text-sm font-bold mb-2">User Name</label>
+                    <label for="email" class="block font-semibold text-gray-500 text-sm mb-2">User Name</label>
                     <input 
                         v-model="form.userName"
                         :disabled="loading"
                         @keyup="clearError('userName')"
                         :class="{ 'border-red-500': hasError('userName') }"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline"
+                        class="bg-transparent appearance-none border border-gray-500 w-full py-2 px-3 placeholder-gray-600 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
                         id="userName"
                         ref="userName" 
                         type="text" 
@@ -22,13 +28,13 @@
                     <p v-if="hasError('userName')" class="text-red-500 text-xs italic mt-1">{{errors.userName}}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="email" class="block text-teal-900 text-sm font-bold mb-2">Email Address</label>
+                    <label for="email" class="block font-semibold text-gray-500 text-sm mb-2">Email Address</label>
                     <input 
                         v-model="form.email" 
                         :disabled="loading"
                         @keyup="clearError('email')"
                         :class="{ 'border-red-500': hasError('email') }"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline"
+                        class="bg-transparent appearance-none border border-gray-500 w-full py-2 px-3 placeholder-gray-600 text-gray-500 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         ref="email"
                         type="email" 
@@ -38,13 +44,13 @@
                     <p v-if="hasError('email')" class="text-red-500 text-xs italic mt-1">{{errors.email}}</p>
                 </div>
                 <div class="mb-4">
-                    <label for="password" class="block text-teal-900 text-sm font-bold mb-2">Password</label>
+                    <label for="password" class="block font-semibold text-gray-500 text-sm mb-2">Password</label>
                     <input 
                         v-model="form.password"
                         :disabled="loading"
                         @keyup="clearError('password')"
                         :class="{ 'border-red-500': hasError('password') }"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline" 
+                        class="bg-transparent appearance-none border border-gray-500 w-full py-2 px-3 placeholder-gray-600 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
                         id="password"
                         ref="password"
                         type="password"
@@ -52,14 +58,14 @@
                         required
                     >
                 </div>
-                <div class="mb-4">
-                    <label for="passwordConfirm" class="block text-teal-900 text-sm font-bold mb-2">Confirm Password</label>
+                <div class="mb-10">
+                    <label for="passwordConfirm" class="block font-semibold text-gray-500 text-sm mb-2">Confirm Password</label>
                     <input 
                         v-model="form.passwordConfirm"
                         :disabled="loading"
                         @keyup="clearError('passwordConfirm')"
                         :class="{ 'border-red-500': hasError('passwordConfirm') }"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-teal-900 leading-tight focus:outline-none focus:shadow-outline" 
+                        class="bg-transparent appearance-none border border-gray-500 w-full py-2 px-3 placeholder-gray-600 text-gray-500 leading-tight focus:outline-none focus:shadow-outline" 
                         id="passwordConfirm"
                         ref="passwordConfirm"
                         type="password"
@@ -71,11 +77,15 @@
                 <button
                     :disabled="loading"
                     type="submit" 
-                    class="w-full bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    class="w-full btn btn-primary"
                 >
-                    Register
+                    Sign up
                 </button>
             </form>
+        </div>
+        <div class="flex justify-center">
+            <span class="text-gray-500 mr-1">Have an account?</span> 
+            <router-link to="Login" class="text-blue-500 hover:text-blue-400">Log in</router-link>
         </div>
     </div>
 </template>

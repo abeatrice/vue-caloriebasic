@@ -1,8 +1,6 @@
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Welcome from './components/body/Welcome';
 import Home from './components/body/Home';
-import Profile from './components/body/Profile';
 import store from './store';
 
 export default {
@@ -10,9 +8,9 @@ export default {
     linkActiveClass: 'font-semibold',
     routes: [{
         path: '/',
-        component: Welcome,
+        component: Register,
         meta: {
-            title: "Where Calorie Tracking is Easy | Calorie Basic"
+            title: "Register | Calorie Basic"
         },
         beforeEnter: (to, from, next) => {
             if(store.getters.loggedIn) {
@@ -28,12 +26,6 @@ export default {
             title: "Login | Calorie Basic"
         }
     }, {
-        path: '/Register',
-        component: Register,
-        meta: {
-            title: "Register | Calorie Basic"
-        }
-    }, {
         path: '/Home',
         component: Home,
         meta: {
@@ -44,12 +36,6 @@ export default {
                 next('/Login');
             }
             next();
-        }
-    }, {
-        path: '/Profile',
-        component: Profile,
-        meta: {
-            title: "Profile | Calorie Basic"
         }
     }, {
         path: '*',
