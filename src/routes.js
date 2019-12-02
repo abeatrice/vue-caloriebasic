@@ -1,7 +1,6 @@
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Home from './components/body/Home';
-import Profile from './components/body/Profile';
 import store from './store';
 
 export default {
@@ -37,12 +36,6 @@ export default {
                 next('/Login');
             }
             next();
-        }
-    }, {
-        path: '/Profile',
-        component: Profile,
-        meta: {
-            title: "Profile | Calorie Basic"
         }
     }, {
         path: '*',
