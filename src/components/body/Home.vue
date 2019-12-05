@@ -3,6 +3,7 @@
     <NavTop class="mt-4"/>
     <div class="flex justify-center items-center">
       <div class="mt-12">
+        <CalorieChart />
         <div class="mb-10">
           <div class="text-6xl text-gray-500 text-center font-semibold leading-none mb-1">
             {{calories.quantity}}
@@ -44,12 +45,14 @@ import {mapGetters, mapActions} from 'vuex';
 import NavTop from '../nav/Top.vue';
 import Datepicker from 'vuejs-datepicker';
 import AdjustCaloriesButtons from '../partials/AdjustCaloriesButtons.vue';
+import CalorieChart from '../partials/CalorieChart.vue';
 
 export default {
   name: 'Home',
   components: {
-    Datepicker,
     NavTop,
+    CalorieChart,
+    Datepicker,
     AdjustCaloriesButtons
   },
   data() {
