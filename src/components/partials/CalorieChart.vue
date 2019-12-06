@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters} from 'vuex';
 import Chart from 'chart.js';
 
 export default {
@@ -11,7 +11,6 @@ export default {
   data() {
     return {
       ctx: null,
-      chart: null,
       weekCalories: [
         1820,
         1980,
@@ -21,32 +20,61 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'calories',
-    ])
+      'weekOfCalories',
+    ]),
+    data() {
+      return {
+
+      }
+    },
   },
   mounted() {
-    this.ctx = document.getElementById('calorieChart').getContext('2d');
-    this.chart = new Chart(this.ctx, {
+    let colorPrimary = 'rgba(44, 82, 130, 1)';
+    let colorSelected = 'rgba(122, 151, 235, 1)';
+    new Chart(document.getElementById('calorieChart').getContext('2d') , {
       type: 'bar',
       data: {
         labels: ['', '', '', '', '', '',''],
         datasets: [{
+            barPercentage: 1.1,
             minBarLength: 2,
             data: [2650, 1950, 2650, 0, 2105, 1860, 1920],
             backgroundColor: [
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-                'rgba(44, 82, 130, 1)',
-            ]
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+            ],
+            hoverBackgroundColor: [
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+            ],
+            borderColor: [
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorPrimary,
+              colorSelected,
+            ],
+            borderWidth: 2
         }]
       },
       options: {
         legend: {
           display: false
+        },
+        tooltips: {
+          enabled: false
         },
         scales: {
           xAxes: [{
@@ -55,6 +83,9 @@ export default {
               }
             }],
             yAxes: [{
+              ticks: {
+                display: false
+              },
               gridLines: {
                   display: false
               }
@@ -62,11 +93,6 @@ export default {
         }
       }
     });
-  },
-  methods: {
-    ...mapActions([
-      'getCalories',
-    ])
   }
 }
 </script>
