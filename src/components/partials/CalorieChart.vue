@@ -20,6 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'selectedDate',
       'weekOfCalories',
     ]),
     data() {

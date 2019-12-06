@@ -3,7 +3,7 @@
     @selected="updateSelectedDate"
     :value="selectedDate"
     :inline="true"
-    class="text-gray-500"
+    class="text-gray-300"
   />
 </template>
 
