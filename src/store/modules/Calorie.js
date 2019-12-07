@@ -8,12 +8,23 @@ const state = {
         "quantity": 0,
         "user_id": ""
     },
+    weekOfCalories: [
+        {
+            "_id": {
+                "date": new Date(),
+            },
+            "quantity": 0
+        }
+    ],
     selectedDate: new Date()
 };
 
 const getters = {
     calories(state) {
         return state.calories;
+    },
+    weekOfCalories(state) {
+        return state.weekOfCalories;
     },
     selectedDate(state) {
         return state.selectedDate;
@@ -29,7 +40,8 @@ const getters = {
 const actions = {
     getCalories({commit, getters, rootGetters}) {
         //set api address        
-        const apiAddress = "https://caloriebasic.com/api";
+        // const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
 
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
@@ -52,9 +64,38 @@ const actions = {
             });
         });
     },
+    getWeekOfCalories({commit, getters, rootGetters}) {
+        //set api address        
+        // const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
+
+        //set axios auth header: Bearer + token
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
+
+        //get a week of calories and commit them to the store
+        return new Promise((resolve, reject) => {
+            axios.get(`${apiAddress}/me/caloriesWeekPrior/${getters.selectedDateIso}`)
+            .then(response => {
+                const data = response.data.calories ? response.data.calories : [
+                    {
+                        "_id": {
+                            "date": new Date(),
+                        },
+                        "quantity": 0
+                    }
+                ];
+                commit('storeWeekOfCalories', data);
+                resolve(response);
+            })
+            .catch(error => {
+                reject(error);
+            });
+        });
+    },
     adjustCalories({commit, getters, rootGetters}, quantity) {
         //set api address
-        const apiAddress = "https://caloriebasic.com/api";
+        // const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
         
         //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
@@ -92,6 +133,7 @@ const actions = {
 
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
+    storeWeekOfCalories: (state, weekOfCalories) => state.weekOfCalories = weekOfCalories,
     updateSelectedDate: (state, date) => state.selectedDate = date,
     adjustCalorie: (state, quantity) => state.calories.quantity = quantity
 };

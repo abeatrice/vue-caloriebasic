@@ -22,7 +22,8 @@ const getters = {
 const actions = {
     register({commit}, form) {
         //set api address
-        const apiAddress = "https://caloriebasic.com/api";
+        //const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
 
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users`, {
@@ -42,7 +43,9 @@ const actions = {
     },
     login({commit}, form) {
         //set api address
-        const apiAddress = "https://caloriebasic.com/api";
+        // const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
+
 
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users/login`, form)
@@ -58,7 +61,8 @@ const actions = {
     },
     logout(context) {
         //set api address
-        const apiAddress = "https://caloriebasic.com/api";
+        // const apiAddress = "https://caloriebasic.com/api";
+        const apiAddress = "http://localhost:3000/api";
 
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.user.token;
 

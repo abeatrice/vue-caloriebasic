@@ -3,70 +3,60 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 import Chart from 'chart.js';
+import moment from 'moment';
 
 export default {
   name: 'CalorieChart',
   data() {
     return {
-      ctx: null,
-      weekCalories: [
-        1820,
-        1980,
-        1545,
-      ],
+      color: {
+        primary: 'rgba(44, 82, 130, 1)',
+        selected: 'rgba(122, 151, 235, 1)',
+        unSelected: 'rgba(45, 55, 72, 1)',
+        danger: 'rgba(245, 101, 101, 1)',
+      }
     }
   },
   computed: {
     ...mapGetters([
       'selectedDate',
       'weekOfCalories',
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'getWeekOfCalories'
     ]),
-    data() {
-      return {
-
-      }
+    dates: function() {
+      return this.weekOfCalories.map(({_id}) => _id.date);
     },
+    quantities: function() {
+      return this.weekOfCalories.map(({quantity}) => quantity);
+    },
+    backgroundColors: function() {
+      return this.weekOfCalories.map(({quantity}) => quantity > "2000" ? this.color.danger : this.color.primary);
+    },
+    borderColors: function() {
+      return this.weekOfCalories.map(({_id}) => _id.date == new moment(this.selectedDate).format('YYYY-MM-DD') ? this.color.selected : this.color.unSelected);
+    }
   },
   mounted() {
-    let colorPrimary = 'rgba(44, 82, 130, 1)';
-    let colorSelected = 'rgba(122, 151, 235, 1)';
+    this.getWeekOfCalories();
+    // console.log(this.weekOfCalories);
+    
     new Chart(document.getElementById('calorieChart').getContext('2d') , {
       type: 'bar',
       data: {
-        labels: ['', '', '', '', '', '',''],
+        labels: this.dates(),
         datasets: [{
             barPercentage: 1.1,
             minBarLength: 2,
-            data: [2650, 1950, 2650, 0, 2105, 1860, 1920],
-            backgroundColor: [
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-            ],
-            hoverBackgroundColor: [
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-            ],
-            borderColor: [
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorPrimary,
-              colorSelected,
-            ],
+            data: this.quantities(),
+            backgroundColor: this.backgroundColors(),
+            hoverBackgroundColor: this.backgroundColors(),
+            borderColor: this.borderColors(),
             borderWidth: 2
         }]
       },
@@ -79,6 +69,9 @@ export default {
         },
         scales: {
           xAxes: [{
+              ticks: {
+                display: false
+              },
               gridLines: {
                   display: false
               }

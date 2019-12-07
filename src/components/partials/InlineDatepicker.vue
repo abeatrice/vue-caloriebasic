@@ -15,6 +15,9 @@
   .selected {
     background-color: #2c5282 !important;
   }
+  .month__year_btn {
+    background-color: transparent !important;
+  }
   .day__month_btn {
     background-color: transparent !important;
   }
