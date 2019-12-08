@@ -1,5 +1,5 @@
 <template>
-  <canvas id="calorieChart" class="z-0"></canvas>
+  <canvas id="calorieChart" style="z-index: -1;"></canvas>
 </template>
 
 <script>
