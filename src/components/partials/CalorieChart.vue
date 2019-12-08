@@ -1,5 +1,5 @@
 <template>
-  <canvas id="calorieChart"></canvas>
+  <canvas id="calorieChart" class="z-0"></canvas>
 </template>
 
 <script>
@@ -11,6 +11,7 @@ export default {
   name: 'CalorieChart',
   data() {
     return {
+      chart: null,
       color: {
         primary: 'rgba(44, 82, 130, 1)',
         selected: 'rgba(122, 151, 235, 1)',
@@ -23,6 +24,7 @@ export default {
     ...mapGetters([
       'selectedDate',
       'weekOfCalories',
+      'chartData'
     ])
   },
   methods: {
@@ -42,22 +44,20 @@ export default {
       return this.weekOfCalories.map(({_id}) => _id.date == new moment(this.selectedDate).format('YYYY-MM-DD') ? this.color.selected : this.color.unSelected);
     }
   },
-  mounted() {
-    this.getWeekOfCalories();
-    // console.log(this.weekOfCalories);
-    
-    new Chart(document.getElementById('calorieChart').getContext('2d') , {
+  async mounted() {
+    await this.getWeekOfCalories();
+    this.chart = new Chart(document.getElementById('calorieChart').getContext('2d') , {
       type: 'bar',
       data: {
         labels: this.dates(),
         datasets: [{
             barPercentage: 1.1,
             minBarLength: 2,
-            data: this.quantities(),
+            data: this.chartData,
             backgroundColor: this.backgroundColors(),
             hoverBackgroundColor: this.backgroundColors(),
             borderColor: this.borderColors(),
-            borderWidth: 2
+            borderWidth: 0
         }]
       },
       options: {

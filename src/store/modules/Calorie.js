@@ -34,6 +34,9 @@ const getters = {
     },
     selectedDateIso(state) {
         return new moment(state.selectedDate).format('YYYY-MM-DD');
+    },
+    chartData(state) {
+        return state.weekOfCalories.map(({quantity}) => quantity);
     }
 };
 
@@ -116,16 +119,6 @@ const actions = {
 
     },
     updateSelectedDate({commit, dispatch}, date) {
-        commit('updateSelectedDate', date);
-        dispatch('getCalories');
-    },
-    selectPrevDay({commit, state, dispatch}) {
-        const date = moment(state.selectedDate).subtract(1, 'days').toDate();
-        commit('updateSelectedDate', date);
-        dispatch('getCalories');
-    },
-    selectNextDay({commit, state, dispatch}) {
-        const date = moment(state.selectedDate).add(1, 'days').toDate();
         commit('updateSelectedDate', date);
         dispatch('getCalories');
     }
