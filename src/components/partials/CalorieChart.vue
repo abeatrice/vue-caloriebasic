@@ -97,10 +97,17 @@ export default {
     this.chart = this.buildChart(); 
   },
   watch: {
-    selectedDateIso: function (val) {
+    selectedDateIso() {
       this.chart.data.datasets[0].borderColor = this.borderColors();
       this.chart.update();
-    }
+    },
+    chartData() {
+      if(this.chart) {
+        this.chart.data.datasets[0].data = this.chartData;
+        this.chart.data.datasets[0].backgroundColor = this.backgroundColors();
+        this.chart.update();
+      }
+    },
   }
 }
 </script>

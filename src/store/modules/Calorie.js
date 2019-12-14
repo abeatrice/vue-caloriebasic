@@ -132,7 +132,14 @@ const actions = {
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
     updateSelectedDate: (state, date) => state.selectedDate = date,
-    adjustCalorie: (state, quantity) => state.calories.quantity = quantity,
+    adjustCalorie: (state, quantity) => {
+        for(let i = 0; i < state.weekOfCalories.length; i++) {
+            if(state.weekOfCalories[i]._id.date == new moment(state.selectedDate).format('YYYY-MM-DD')) {
+                state.weekOfCalories[i].quantity = quantity;
+            }
+        }
+        state.calories.quantity = quantity
+    },
     storeWeekOfCalories: (state, weekOfCalories) => {
         for(let i = 0; i < state.weekOfCalories.length; i++) {
             for(const c of weekOfCalories) {
