@@ -5,7 +5,6 @@
 <script>
 import {mapGetters, mapActions} from 'vuex';
 import Chart from 'chart.js';
-import moment from 'moment';
 
 export default {
   name: 'CalorieChart',
@@ -15,14 +14,14 @@ export default {
       color: {
         primary: 'rgba(44, 82, 130, 1)',
         selected: 'rgba(122, 151, 235, 1)',
-        unSelected: 'rgba(45, 55, 72, 1)',
+        unSelected: 'rgba(122, 151, 235, 0)',
         danger: 'rgba(245, 101, 101, 1)',
       }
     }
   },
   computed: {
     ...mapGetters([
-      'selectedDate',
+      'selectedDateIso',
       'weekOfCalories',
       'chartData'
     ])
@@ -31,62 +30,77 @@ export default {
     ...mapActions([
       'getWeekOfCalories'
     ]),
-    dates: function() {
+    dates() {
       return this.weekOfCalories.map(({_id}) => _id.date);
     },
-    quantities: function() {
+    quantities() {
       return this.weekOfCalories.map(({quantity}) => quantity);
     },
-    backgroundColors: function() {
+    backgroundColors() {
       return this.weekOfCalories.map(({quantity}) => quantity > "2000" ? this.color.danger : this.color.primary);
     },
-    borderColors: function() {
-      return this.weekOfCalories.map(({_id}) => _id.date == new moment(this.selectedDate).format('YYYY-MM-DD') ? this.color.selected : this.color.unSelected);
-    }
-  },
-  async mounted() {
-    await this.getWeekOfCalories();
-    this.chart = new Chart(document.getElementById('calorieChart').getContext('2d') , {
-      type: 'bar',
-      data: {
-        labels: this.dates(),
-        datasets: [{
+    borderColors() {
+      return this.weekOfCalories.map(({_id}) => _id.date == this.selectedDateIso ? this.color.selected : this.color.unSelected);
+    },
+    buildChart() {
+      return new Chart(document.getElementById('calorieChart').getContext('2d') , {
+        type: 'bar',
+        data: {
+          labels: this.dates(),
+          datasets: [{
             barPercentage: 1.1,
             minBarLength: 2,
             data: this.chartData,
             backgroundColor: this.backgroundColors(),
             hoverBackgroundColor: this.backgroundColors(),
             borderColor: this.borderColors(),
-            borderWidth: 0
-        }]
-      },
-      options: {
-        legend: {
-          display: false
+            borderSkipped: 'false',
+            borderWidth: {
+              'left': 0,
+              'right': 0,
+              'top': 0,
+              'bottom': 3,
+            }
+          }]
         },
-        tooltips: {
-          enabled: false
-        },
-        scales: {
-          xAxes: [{
-              ticks: {
-                display: false
-              },
-              gridLines: {
+        options: {
+          legend: {
+            display: false
+          },
+          tooltips: {
+            enabled: false
+          },
+          scales: {
+            xAxes: [{
+                ticks: {
                   display: false
-              }
-            }],
-            yAxes: [{
-              ticks: {
-                display: false
-              },
-              gridLines: {
+                },
+                gridLines: {
+                    display: false
+                }
+              }],
+              yAxes: [{
+                ticks: {
                   display: false
-              }
-            }]
+                },
+                gridLines: {
+                    display: false
+                }
+              }]
+          }
         }
-      }
-    });
+      });
+    },
+  },
+  async mounted() {
+    await this.getWeekOfCalories();
+    this.chart = this.buildChart(); 
+  },
+  watch: {
+    selectedDateIso: function (val) {
+      this.chart.data.datasets[0].borderColor = this.borderColors();
+      this.chart.update();
+    }
   }
 }
 </script>

@@ -1,6 +1,18 @@
 import axios from 'axios';
 import moment from 'moment';
 
+let weekOfCalories = [];
+let today = new moment();
+for(let i = 0; i < 7; i++) {
+    weekOfCalories.unshift({
+        "_id": {
+            "date": today.format('YYYY-MM-DD'),
+        },
+        "quantity": 0
+    });
+    today.subtract(1,'day');
+}
+
 const state = {
     calories: {
         "_id": "",
@@ -8,14 +20,7 @@ const state = {
         "quantity": 0,
         "user_id": ""
     },
-    weekOfCalories: [
-        {
-            "_id": {
-                "date": new Date(),
-            },
-            "quantity": 0
-        }
-    ],
+    weekOfCalories,
     selectedDate: new Date()
 };
 
@@ -126,9 +131,17 @@ const actions = {
 
 const mutations = {
     storeCalories: (state, calories) => state.calories = calories,
-    storeWeekOfCalories: (state, weekOfCalories) => state.weekOfCalories = weekOfCalories,
     updateSelectedDate: (state, date) => state.selectedDate = date,
-    adjustCalorie: (state, quantity) => state.calories.quantity = quantity
+    adjustCalorie: (state, quantity) => state.calories.quantity = quantity,
+    storeWeekOfCalories: (state, weekOfCalories) => {
+        for(let i = 0; i < state.weekOfCalories.length; i++) {
+            for(const c of weekOfCalories) {
+                if(state.weekOfCalories[i]._id.date == c._id.date) {
+                    state.weekOfCalories.splice(i, 1, c);
+                }
+            }
+        }
+    },
 };
 
 export default {

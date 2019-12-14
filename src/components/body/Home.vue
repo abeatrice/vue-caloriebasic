@@ -3,7 +3,7 @@
     <NavTop class="mt-4"/>
     <div class="flex justify-center items-center">
       <div class="mt-12">
-        <displayed-calories class="-mb-24 z-10" />
+        <displayed-calories class="-mb-24" />
         <calorie-chart class="relative" />
         <inline-datepicker class="mb-10" />
         <adjust-calories-buttons />
