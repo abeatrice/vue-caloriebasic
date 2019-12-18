@@ -46,6 +46,7 @@ export default {
     methods: {
         async signOut() {
             this.open = false;
+            this.$store.dispatch('resetInitialState');
             await this.$store.dispatch('logout')
             .then(() => this.$router.push('/Login'));
         }

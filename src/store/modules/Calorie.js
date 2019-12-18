@@ -1,28 +1,37 @@
 import axios from 'axios';
 import moment from 'moment';
 
-let weekOfCalories = [];
-let today = new moment();
-for(let i = 0; i < 7; i++) {
-    weekOfCalories.unshift({
-        "_id": {
-            "date": today.format('YYYY-MM-DD'),
-        },
-        "quantity": 0
-    });
-    today.subtract(1,'day');
-}
+let initialState = () => {
 
-const state = {
-    calories: {
+    let weekOfCalories = [];
+    let today = new moment();
+    let selectedDate = new Date();
+
+    for(let i = 0; i < 7; i++) {
+        weekOfCalories.unshift({
+            "_id": {
+                "date": today.format('YYYY-MM-DD'),
+            },
+            "quantity": 0
+        });
+        today.subtract(1,'day');
+    }
+
+    let calories = {
         "_id": "",
-        "date": new Date(),
+        "date": selectedDate,
         "quantity": 0,
         "user_id": ""
-    },
-    weekOfCalories,
-    selectedDate: new Date()
-};
+    };
+
+    return {
+        calories,
+        weekOfCalories,
+        selectedDate
+    }
+}
+
+const state = initialState();
 
 const getters = {
     calories(state) {
@@ -46,6 +55,9 @@ const getters = {
 };
 
 const actions = {
+    resetInitialState({commit}) {
+        commit('resetState');
+    },
     getCalories({commit, getters, rootGetters}) {
         //set api address        
         // const apiAddress = "https://caloriebasic.com/api";
@@ -130,6 +142,12 @@ const actions = {
 };
 
 const mutations = {
+    resetState: (state) => {
+        const s = initialState()
+        Object.keys(s).forEach(key => {
+            state[key] = s[key]
+        })
+    },
     storeCalories: (state, calories) => state.calories = calories,
     updateSelectedDate: (state, date) => state.selectedDate = date,
     adjustCalorie: (state, quantity) => {

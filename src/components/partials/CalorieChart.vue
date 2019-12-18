@@ -12,10 +12,10 @@ export default {
     return {
       chart: null,
       color: {
-        primary: 'rgba(44, 82, 130, 1)',
-        selected: 'rgba(122, 151, 235, 1)',
+        primary: 'rgba(44, 82, 130, .5)',
+        selected: 'rgba(122, 151, 235, .5)',
         unSelected: 'rgba(122, 151, 235, 0)',
-        danger: 'rgba(245, 101, 101, 1)',
+        danger: 'rgba(245, 101, 101, .5)',
       }
     }
   },
@@ -81,7 +81,9 @@ export default {
               }],
               yAxes: [{
                 ticks: {
-                  display: false
+                  display: false,
+                  beginAtZero: true,
+                  suggestedMax: 2000
                 },
                 gridLines: {
                     display: false
