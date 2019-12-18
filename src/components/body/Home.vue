@@ -5,7 +5,7 @@
       <div class="mt-12">
         <displayed-calories class="-mb-32" />
         <calorie-chart class="relative" />
-        <inline-datepicker class="mb-10" />
+        <inline-datepicker class="mt-5 mb-8" />
         <adjust-calories-buttons />
       </div>
     </div>
