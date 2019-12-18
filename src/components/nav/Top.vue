@@ -1,6 +1,6 @@
 <template>
     <nav class="flex items-center justify-between px-6 py-1">
-        <div class="flex items-center flex-shrink-0 text-indigo-400">
+        <div class="flex items-center flex-shrink-0 text-blue-400">
             <router-link to="/" class="font-semibold text-xl tracking-tight" active-class="">
                 <div class="flex items-center">
                     <svg class="fill-current h-5 w-5" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@
             </router-link>
         </div>
         <div class="text-sm">
-            <span class="flex items-center text-indigo-400">
+            <span id="dropdown" class="flex items-center text-blue-400">
                 <span class="mr-3">{{userName}}</span>
                 <svg @click="open = !open" class="h-4 w-4 fill-current hover:text-teal-100 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path v-if="!open" d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
@@ -49,6 +49,19 @@ export default {
             this.$store.dispatch('resetInitialState');
             await this.$store.dispatch('logout')
             .then(() => this.$router.push('/Login'));
+        },
+        closeIfClickedOutside(event) {
+            if(! event.target.closest('#dropdown')) {
+                this.open = false;
+                document.removeEventListener('click', this.closeIfClickedOutside);
+            }
+        }
+    },
+    watch: {
+        open(isOpen) {
+            if(isOpen) {
+                document.addEventListener('click', this.closeIfClickedOutside);
+            }
         }
     }
 }

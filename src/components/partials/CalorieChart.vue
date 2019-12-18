@@ -70,6 +70,11 @@ export default {
           tooltips: {
             enabled: false
           },
+          layout: {
+            padding: {
+              left: -10,
+            }
+          },
           scales: {
             xAxes: [{
                 ticks: {

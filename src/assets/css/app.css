@@ -10,17 +10,17 @@
 }
 
 .btn-primary {
-    @apply bg-blue-800 text-blue-400;
+    @apply bg-blue-600 text-gray-800;
 }
 .btn-primary:hover {
     @apply bg-blue-700;
 }
 
-.btn-danger {
-    @apply bg-red-500 text-red-700;
+.btn-secondary {
+    @apply bg-gray-600 text-gray-800;
 }
-.btn-danger:hover {
-    @apply bg-red-400;
+.btn-secondary:hover {
+    @apply bg-gray-700;
 }
 
 @tailwind utilities;

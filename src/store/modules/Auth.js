@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const apiAddress = process.env.VUE_APP_API_ADDRESS;
+
 const state = {
     user: JSON.parse(localStorage.getItem('user')) || null
 };
@@ -21,10 +23,6 @@ const getters = {
 
 const actions = {
     register({commit}, form) {
-        //set api address
-        //const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users`, {
                 userName: form.userName,
@@ -42,11 +40,6 @@ const actions = {
         });
     },
     login({commit}, form) {
-        //set api address
-        // const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-
-
         return new Promise((resolve, reject) => {
             axios.post(`${apiAddress}/users/login`, form)
             .then(response => {
@@ -60,10 +53,6 @@ const actions = {
         });
     },
     logout(context) {
-        //set api address
-        // const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + context.state.user.token;
 
         if(context.getters.loggedIn) {

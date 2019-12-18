@@ -1,6 +1,8 @@
 import axios from 'axios';
 import moment from 'moment';
 
+const apiAddress = process.env.VUE_APP_API_ADDRESS;
+
 let initialState = () => {
 
     let weekOfCalories = [];
@@ -59,11 +61,6 @@ const actions = {
         commit('resetState');
     },
     getCalories({commit, getters, rootGetters}) {
-        //set api address        
-        // const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-
-        //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         //get calories and commit them to store
@@ -85,11 +82,6 @@ const actions = {
         });
     },
     getWeekOfCalories({commit, getters, rootGetters}) {
-        //set api address        
-        // const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-
-        //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         //get a week of calories and commit them to the store
@@ -113,11 +105,6 @@ const actions = {
         });
     },
     adjustCalories({commit, getters, rootGetters}, quantity) {
-        //set api address
-        // const apiAddress = "https://caloriebasic.com/api";
-        const apiAddress = "http://localhost:3000/api";
-        
-        //set axios auth header: Bearer + token
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + rootGetters.authToken;
 
         return new Promise((resolve, reject) => {
