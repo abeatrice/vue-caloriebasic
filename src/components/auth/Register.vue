@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-col">
-        <div class="flex justify-center text-6xl text-indigo-400 mt-16 leading-none mb-2">
+        <div class="flex justify-center text-6xl text-blue-400 mt-16 leading-none mb-2">
             Calorie Basic
         </div>
         <div class="flex justify-center text-gray-500 mb-4">
