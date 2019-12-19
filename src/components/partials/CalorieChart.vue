@@ -14,7 +14,7 @@ export default {
       color: {
         primary: 'rgba(44, 82, 130, .5)',
         selected: 'rgba(122, 151, 235, .5)',
-        unSelected: 'rgba(122, 151, 235, 0)',
+        transparent: 'rgba(0, 0, 0, 0)',
         danger: 'rgba(245, 101, 101, .5)',
       }
     }
@@ -40,7 +40,7 @@ export default {
       return this.weekOfCalories.map(({quantity}) => quantity > "2000" ? this.color.danger : this.color.primary);
     },
     borderColors() {
-      return this.weekOfCalories.map(({_id}) => _id.date == this.selectedDateIso ? this.color.selected : this.color.unSelected);
+      return this.weekOfCalories.map(({_id}) => _id.date == this.selectedDateIso ? this.color.selected : this.color.transparent);
     },
     buildChart() {
       return new Chart(document.getElementById('calorieChart').getContext('2d') , {
@@ -48,6 +48,7 @@ export default {
         data: {
           labels: this.dates(),
           datasets: [{
+            order: 2,
             barPercentage: 1.1,
             minBarLength: 2,
             data: this.chartData,
@@ -60,8 +61,16 @@ export default {
               'right': 0,
               'top': 0,
               'bottom': 3,
-            }
-          }]
+            },
+          }, {
+            order: 1,
+            type: 'line',
+            data: [2000, 2000, 2000, 2000, 2000, 2000, 2000],
+            pointRadius: 0,            
+            borderColor: this.color.selected,
+            borderWidth: 1,
+            fill: false,
+          },]
         },
         options: {
           legend: {
@@ -88,7 +97,7 @@ export default {
                 ticks: {
                   display: false,
                   beginAtZero: true,
-                  suggestedMax: 2000
+                  suggestedMax: 2500
                 },
                 gridLines: {
                     display: false
